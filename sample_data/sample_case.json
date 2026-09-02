@@ -1,0 +1,14 @@
+{
+  "case_id": "CASE-2026-001",
+  "title": "Suspected insider data exfil",
+  "opened_at": "2026-01-10T09:00:00Z",
+  "investigator": "analyst.one",
+  "evidence": [
+    {"item_id": "E-001", "description": "Laptop disk image", "hash_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "received_at": "2026-01-10T10:00:00Z", "custodian": "IT"},
+    {"item_id": "E-002", "description": "Browser profile export", "hash_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "received_at": "2026-01-10T11:00:00Z", "custodian": "Legal"}
+  ],
+  "chain_of_custody": [
+    {"item_id": "E-001", "from": "IT", "to": "analyst.one", "at": "2026-01-10T10:05:00Z", "action": "received"},
+    {"item_id": "E-001", "from": "analyst.one", "to": "lab.storage", "at": "2026-01-11T16:00:00Z", "action": "stored"}
+  ]
+}

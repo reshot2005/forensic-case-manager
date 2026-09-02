@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "forensic-case-manager"
+version = "0.1.0"
+description = "Case/evidence intake, chain-of-custody tracking."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+authors = [{ name = "Security Research Collection" }]
+keywords = ["security", "template"]
+dependencies = [
+    "secintel-core>=0.1.0",
+    "typer>=0.12",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "secintel-core[dev]>=0.1.0",
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "ruff>=0.4",
+    "mypy>=1.8",
+    "jsonschema>=4.21",
+]
+
+[project.scripts]
+forensic-case-manager = "forensic_case_manager.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/forensic_case_manager"]
+
+[tool.hatch.build.targets.sdist]
+only-include = ["src/forensic_case_manager", "sample_data", "scripts", "docs", "report", "README.md", "LICENSE"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "S", "C4"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+"src/forensic_case_manager/cli.py" = ["B008"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+packages = ["forensic_case_manager"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["forensic_case_manager"]
